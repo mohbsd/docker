@@ -1,3 +1,20 @@
+Menu:
+1. Basic container usage and commands
+2. Attaching and detaching from a container
+3. Running specific commands in containers
+4. Temporary - one shot - containers
+5. Default user settings and running containers with specific user IDs
+6. Examining container processes and ressource usage
+7. Stopping, starting and killing containers
+8. Removing containers
+9. Watching/examining container logs
+10. Container configuration files
+11. Logs again : How to monitor logs continuously
+12. Ressources limits on containers
+
+
+
+
 1. Basic container usage and commands :
 
 # docker run name:tag (get an image from the local images or from registry)

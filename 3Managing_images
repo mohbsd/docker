@@ -1,0 +1,64 @@
+1. Find images
+2. Download images
+3. Remove images
+4. Create new images from an existing one
+5. Move, backup and restore images
+6. Upload images to registry
+
+---
+
+1. Find images
+# docker search image_name
+# docker search -s 50 image_name
+. -s = minimum stars
+>> we can get images from the hub.docker.com and details
+
+2. Download images
+# docker pull image_name (grabs the latest because no version specified = :tag)
+# docker pull nginx:1.9 (grabs the 1.9 versions)
+# docker images (lists the images on the system)
+# docker pull -a image_name (grabs all images)
+# docker images -a (list all images)
+
+
+3. Remove images
+# docker rmi image_name 
+# docker rmi image_name:tag
+# docker rmi -f image_name (removes an image in use forcely)
+
+4. Create new images from an existing one (ex: w/ nginx)
+# docker run -d --name nginx6 nginx
+# docker exec -ti nginx6 /bin/bash
+>> when inside the image install packages, customize the image
+>> exit w/ ctrl p+q
+# docker diff nginx6 (lists the changes made)
+# docker commit -a "author_name" -m "message of note" nginx6 image_name_customized
+. -a = author
+. -m = message
+
+
+5. Move, backup and restore images
+
+# docker export nginx6 > nginx6.tar
+or
+# docker export -o nginx6b.tar nginx
+. o = output
+>> archives the images
+
+# tar tvf nginx.tar |less (list the content)
+# docker import nginx6.tar nginx-own:latest (will import the image from the archive tar)
+
+# docker save -o nginx-save.tar nginx:latest
+# tar tvf nginx-save.tar |less (list the content) >> not a flatent image but we all the layers, metadata, changes ....
+
+# docker load -i nginx-save.tar (will load the image)
+. i = import
+
+6. Upload images to registry
+>> create a user >> free >> public
+			     >> paid >> private
+# docker login (to login)
+# docker images 
+# docker tag nginx-own docker.io/username_login/image_name:tag (tags the image)
+ex: #  docker tag nginx-own docker.io/mohbsd/nginx_preprod:1
+# docker push mohbsd/nginx_preprod:1 (pushes the image to my registry)
