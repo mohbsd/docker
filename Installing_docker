@@ -1,0 +1,21 @@
+Installing docker : 
+
+~ distro binaries packages through apt , yum >> but version could be old
+
+~ https://get.docker.com
+> copy past to shell the following command:
+>> # curl -fsSL get.docker.com -o get-docker.sh <<
+>>> it checks the distro and intall docker last flavour
+
+# docker info
+
+# ls -lh /var/run/docker.sock 
+>> to check group and permission
+>> add user to docker group : ex 
+# usermod -aG docker user 
+or 
+# gpasswd -a student docker
+
+~ /etc/default/docker is the file where we can chnage the way to administrate docker : remotely, localy or use an HTTP proxy
+
+~ everything is on /var/lib/docker

@@ -1,0 +1,432 @@
+   12  curl -fsSL get.docker.com -o get-docker.sh
+   14  sh get-docker.sh 
+   15  docker info
+   16  docker run -ti --name b10 
+   17  docker run -ti --name b10 busybox
+   18  docker exec top b10
+   19  docker exec b10 top
+   20  docker exec b10 ls
+   21  docker logs -f b10
+   22  docker images
+   23  docker run -d nginx
+   24  docker ps
+   25  docker ps --no-trunc
+   26  docker images
+   27  docker ps
+   28  docker run -d --name nginx1 nginx
+   29  docker ps
+   30  docker run -d --name b1 busybox
+   31  docker ps
+   32  docker images
+   33  docker ps -a
+   34  docker run -ti b2 busybox 
+   35  docker run -ti --name b2 busybox 
+   36  docker ps -a
+   37  docker ps
+   38  docker run -ti --name b3 busybox
+   39  docker attach b3
+   43  docker attach b3
+   44  docker ps
+   45  docker attach nginx1
+   46  docker ps -a
+   47  docker attach nginx1
+   48  docker start nginx1
+   49  docker attach niginx1
+   50  docker attach nginx1
+   51  docker ps -a
+   52  docker ps
+   53  docker run -d --name nginx2 nginx
+   54  docker ps
+   55  docker exec nginx2 id
+   56  docker exec nginx2 top
+   57  docker exec nginx2 ip a s
+   58  docker exec nginx2 id
+   59  docker exec nginx2 ifconfig
+   60  docker exec nginx2 ls
+   61  docker exec nginx2 ls /etc/*
+   62  docker exec -ti nginx2 /bin/sh
+   63  docker exec -ti nginx2 /bin/bash
+   64  docker ps
+   65  docker run --name b4 busybox ip a s
+   66  docker ps
+   67  docker run busybox ip a s
+   68  docker ps
+   69  docker ps -a
+   70  docker run --name b10 --rm busybox ip a s
+   71  docker ps
+   72  docker ps -a
+   73  docker run --rm busydox id
+   74  docker run --rm busybox id
+   75  docker ps
+   76  docker run --rm -u 999:999 busybox id
+   77  docker ps -a
+   78  docker exex -ti nginx2 /bin/bash
+   79  docker exec -ti nginx2 /bin/bash
+   81  docker ps
+   82  docker exec --name b4 busybox ip a s
+   83  docker run --name b4 busybox ip a s
+   84  docker run --name b5 busybox ip a s
+   85  docker ps
+   87  docker ps -a
+   88  docker run busybox ip a s
+   89  docker ps 
+   90  docker ps -a
+   91  docker run --name b10 --rm busybox ip a s
+   92  docker ps -a
+   93  docker run --rm busybox id
+   94  docker run --rm -u 900:900 busybox id
+   95  docker ps
+   96  docker top nginx2
+   97  docker stats nginx2
+   98  docker top nginx2
+   99  docker stats nginx2
+  100  docker stop nginx2
+  101  docker ps
+  102  docker start all
+  103  docker start nginx2
+  104  docker ps
+  105  docker ps -a
+  106  docker run --name b10 busybox /bin/bash
+  107  docker ps
+  108  docker ps -a
+  109  docker ps
+  110  docker stop -t 15 nginx2
+  111  docker -ti --name b10 busybox
+  112  docker run -ti --name b10 busybox
+  113  docker run -ti --name b11 busybox
+  114  docker stop -t 15 b11
+  115  docker ps
+  116  docker ps -a
+  117  docker run --name b12 busybox
+  118  docker ps
+  119  docker run -ti --name b12 busybox
+  120  docker run -ti --name b13 busybox
+  121  docker kill b13
+  122  docker ps -
+  123  docker ps -a
+  124  docker rm b10 b11 b12 b13
+  125  docker ps -a
+  126  docker rm epic_kalam
+  127  docker stop epic_kalam
+  128  docker ps -q
+  129  docker ps -a
+  130  docker rm epic_kalam
+  131  docker ps -a
+  132  docker logs b5
+  133  cd /var/lib/docker/
+  150  docker ps -a
+  167  docker ps
+  168  docker ps -a
+  169  docker logs -f b4
+  170  docker run -ti --name b5 /bin/bash
+  171  docker run -ti --name b5 busybox 
+  172  docker run -ti --name b10 busybox 
+  173  docker logs -f b10
+  174  docker run -d --name nginx3 -m 500M
+  175  docker run -d --name nginx3 nginx -m 500M 
+  176  docker stats nginx3
+  177  docker ps
+  178  docker start nginx3
+  179  docker run -d --name nginx3 -m 500M nginx
+  180  docker rm nginx3
+  181  docker run -d --name nginx3 -m 500M nginx
+  182  docker stats nginx3
+  183  docker run -d --name nginx4 nginx
+  184  docker stats nginx*
+  185  docker stats nginx3 nginx4
+  186  docker run -d --name nginx5 -m 512M --memory-reserved 256M
+  187  docker run --help
+  188  docker run -d --name nginx5 -m 512M --memory-reservation 256M
+  189  docker run -d --name nginx5 nginx -m 512M --memory-reservation 256M
+  190  docker run -d --name ngin5 -m 512M --memory-reservation 256M nginx
+  191  docker stats nginx3 nginx4 nginx5
+  192  docker run -d --name nginx5 -m 512M --memory-reservation 256M nginx
+  193  docker stats nginx3 nginx4 nginx5 
+  194  docker ps
+  195  docker stats nginx3 nginx4 ngin5 
+  225  docker images
+  227  docker search ubuntu
+  228  docker search nginx
+  229  docker images -a
+  230  docker images
+  231  docker
+  232  docker ps
+  233  docker stop ngin5 nginx4 nginx3 b10
+  234  docker ps
+  235  docker ps -a
+  236  docker log -f b10
+  237  docker logs -f b10
+  238  docker ps a
+  239  docker ps -a
+  240  docker rm b1 b2 b3 b4 nginx1 nginx2
+  241  docker ps -a
+  242  docker rm nginx*
+  243  docker rm --name nginx
+  244  docker rm nginx5-4-3
+  245  docker rm nginx5
+  246  docker rm nginx4
+  247  docker rm nginx3
+  248  docker rm b10
+  249  docker ps -a
+  250  docker ps -aq
+  251  docker stop $(docker ps -a)
+  252  docker stop $(docker ps -aq)
+  253  docker rm $(docker ps -aq)
+  254  docker ps
+  255  docker ps -a
+  256  docker inmages
+  257  docker images
+  258  docker run -d --name n1 nginx 
+  259  docker ps
+  260  docker run -ti n1 /bin/bash
+  261  docker run -ti n1 nginx /bin/bash
+  262  docker run -ti --name n1 nginx /bin/bash
+  263  docker exec -ti n1 nginx /bin/sh
+  264  docker exec -ti n1 nginx /bin/bash
+  265  docker exec -ti n1 /bin/bash nginx
+  266  docker ps
+  267  docker exec -ti n1 /bin/bash
+  268  docker diff n1
+  269  docker diff n1 |grep wget
+  270  docker commit -a "student" -m  "wtf this F... Life" n1 momo_nginx:1
+  271  docker images -a
+  272  docker
+  273  docker ps -a
+  274  docker 
+  275  docker export n1> n1.tar.gz
+  276  docker export -o n1_a.tar.gz n1
+  279  docker import n1.tar.gz n1:latest 
+  280  docker images -aq
+  281  docker images -a
+  282  docker save -o nginx-save-tar nginx:latest
+  283  docker save -o nginx-save.tar nginx:latest
+  284  docker images -ps
+  285  docker images 
+  287  docker rmi nginx
+  288  docker ps
+  289  docker stop n1
+  290  docker rm n1
+  291  docker ps
+  292  docker rm nginx
+  293  docker rmi nginx
+  294  docker images
+  295  docker load -i nginx-save.tar
+  296  docker images
+  299  docker login
+  300  docker
+  301  docker images
+  302  docker tag momo_nginx docker.io/mohbsd/mohbsd_nginx2:2
+  303  docker tag momo_nginx:1 docker.io/mohbsd/mohbsd_nginx2:2
+  304  docker images
+  305  docker push mohbsd/mohbsd_nginx2:2
+  306  docker images
+  307  docker rmi aa012f199e4f
+  309  docker logout
+  310  docker pull mohbsd/nginx_wget
+  312  docker login
+  313  docker pull mohbsd/nginx_wget
+  314  docker pull mohbsd/nginx_wget:1
+  315  docker images
+  316  docker ps
+  317  docker ps -a
+  318  cd /var/lib/docker/volumes/
+  321  docker run -d --name n1 nginx_wget:1
+  322  docker images
+  323  docker run -d --name n1 mohbsd/nginx_wget:1
+  324  docker ps
+  325  docker exec -ti n1 /bin/bash
+  331  docker ps
+  332  docker images
+  333  docker run -d -ti --name n2 -v /data n1 
+  334  docker run -d -ti --name n2 -v /data nginx
+  335  docker attach -ti n2 /bin/bash
+  336  docker attach n2 /bin/bash
+  337  docker attach n2
+  338  docker start n2
+  339  docker attach n2
+  340  docker stats n2
+  341  docker ps
+  342  docker run -d -ti --name nginx1 -v /data nginx
+  343  docker ps
+  344  docker attach nginx
+  345  docker attach nginx1
+  346  docker run -d --name busy1 busybox
+  347  docker ps
+  348  docker ps -a
+  349  docker attach busy1
+  350  docker start busy1
+  351  docker attach busy1
+  352  docker start busy1
+  353  docker ps
+  354  docker run -d -ti --name busy2 -v /data busybox
+  355  docker attach busy2
+  356  docker 
+  357  docker inspect busy2
+  358  docker inspect busy2 |grep volume
+  364  docker ps
+  365  docker stop busy2
+  366  docker ps
+  370  docker start busy2
+  371  docker attach busy2
+  372  docker ps
+  390  usermod -aG docker student
+  400  docker ps
+  401  docker ps -a
+  402  docker start busy2
+  403  docker attach busy2
+  404  docker run -d -ti --name busy3 -v /mnt/storage1:/disk1 busybox
+  405  docker ps
+  406  docker attach busy3
+  409  docker run --help
+  410  docker run -d -ti --name busy4 --volumes-from busy3 busybox 
+  411  docker ps
+  412  docker attach busy4
+  413  docker attach busy3
+  414  docker ps
+  415  docker stop busy3
+  416  docker attach busy4
+  417  docker 
+  418  docker inspect busy3
+  419  docker inspect busy4
+  423  docker run -d -ti --name busy5 -v /mnt/storage2:/data:ro busybox
+  424  docker attach busy5
+  426  docker attach busy5
+  431  docker
+  432  docker ps
+  433  docker attach busy2
+  434  docker cp busy2:/data/* /tmp
+  435  docker cp busy2:/data/* /tmp/
+  436  docker cp busy2:/data/ /tmp
+  440  docker cp -r busy2:/data/ /tmp
+  441  docker cp --help
+  442  docker cp busy2:/data /tmp
+  448  docker cp /tmp/data/ busy4:/storage1/
+  449  docker attach busy4
+  450  docker cp /tmp/data/ busy4:/disk1/
+  451  docker attach busy4
+  453  docker 
+  454  docker network ls
+  461  docker network --help
+  462  docker network inspect --help
+  463  docker network inspect -v bridge
+  464  docker network inspect -v busy2
+  465  docker network ls
+  466  docker network inspect host
+  467  docker network inspect none
+  468  docker network inspect -v bridge
+  470  docker images
+  471  docker ps
+  472  docker stop busy2
+  473  docker stop busy4
+  474  docker stop busy5
+  475  docker run -d --name web1 nginx
+  476  docker ps
+  477  docker network inspect bridge
+  478  docker exec -ti web1 ipp addr show
+  479  docker exec -ti web1 ip addr show
+  480  docker exec -ti web1 ip a s
+  481  docker exec -ti web1 ifconfig
+  482  docker attach web1
+  483  docker pull apache
+  484  docker search apache
+  485  docker pull httpd
+  486  docker ps
+  487  docker images
+  488  docker ps
+  489  docker start web1
+  490  docker ps
+  491  docker exec -ti web1 ip addr show
+  492  docker exec -ti web1 ip a s
+  493  docker network inspect bridge
+  494  docker exec -ti web1 ip addr show
+  495  docker ps
+  496  docker run -d --name=web2 httpd
+  497  docker ps
+  498  docker netowrk inspect bridge
+  499  docker network inspect bridge
+  500  docker exec -ti web2 ip addr show
+  501  docker attach web2
+  502  docker attach -ti  web2 /bin/bash
+  503  docker attach -help
+  504  docker attach --help
+  505  docker run -ti --name=web3 httpd
+  506  docker run -ti --name=web3 httpd /bin/bash
+  507  docker run -ti --name=busy1 busybox
+  508  docker run -ti --name=bus busybox
+  509  docker run -ti -name=web4 httpd /bin/bash
+  510  docker run -ti --name=web4 httpd /bin/bash
+  512  docker ps
+  513  docker attach web4
+  514  docker exec web1 /bin/bash
+  515  docker exec -ti web1 /bin/bash
+  516  docker ps
+  517  docker exec web1 ifconfig
+  518  docker ps
+  519  docker attach web1
+  520  docker exec -ti web /bin/bash 
+  521  docker exec -ti web1 /bin/bash 
+  522  docker ps
+  523  docker start web1
+  524  docker attach web1
+  525  docker ps
+  526  docker start web1
+  527  docker ps
+  528  docker exec -ti web1 /bin/bash
+  529  docker ps
+  530  docker network inspect bridge
+  531  docker run --rm --net=none -ti busybox
+  532  docker ps
+  533  docker run --rm --net=host -ti httpd
+  534  docker run --rm --net=host -ti busybox
+  535  docker ps
+  536  docker network create closed
+  537  docker network ls
+  538  docker network inspect closed
+  539  docker network rm closed
+  540  docker network ls
+  541  docker network create --internal --subnet=172.19.0.0/16 closed
+  542  docker network ls
+  543  docker inspect closed
+  544  docker run -ti --net=closed --name=bb busybox 
+  545  docker run -ti --net=closed --name=nn busybox
+  546  docker ps
+  547  docker run -d -P --name=web2 nginx
+  548  docker run -d -P --name=web20 nginx
+  549  docker port web 20
+  550  docker port web20
+  551  docker exec web20 ip a s
+  552  docker exec -ti web20 /bin/bash
+  553  docker port web20
+  555  docker port web22
+  557  docker run -d -P --name=web23 nginx
+  558  docker port 
+  559  docker port web23
+  566  docker run -d -p 80:8000 --name=zulu nginx
+  567  docker ps
+  568  docker port zulu
+  569  docker exec -ti zulu ip a s
+  570  docker exec -ti bb ip a s
+  571  docker exec -ti web22 ip a s
+  572  docker exec -ti zulu /bin/bash
+  573  docker exec -ti zulu ifconfig
+  574  docker port zulu
+  581  docker ps
+  584  docker port zulu
+  585  docker  ps
+  595  docker run -d --name webb -p 8000:80 nginx
+  596  docker port webb
+  607  docker build -t own-image:v1 .
+  612  docker run -ti own-image:v1
+  621  docker build -t own-image:v2 .
+  622  docker build --no-cache own-image:v3 .
+  623  docker build --no-cache -t own-image:v3 .
+  625  docker images
+  626  docker ps
+  627  docker run -ti --name ubuntu_test:1 /bin/bash
+  628  docker run -ti --name ubuntu_test:1 own-image /bin/bash
+  629  docker run -ti --name ubuntu_test:1 own-image:v1 /bin/bash
+  630  docker run -ti --name ubuntu_test own-image:v1 /bin/bash
+  631  history |grep docker
+  632  history > /home/student/docker_commands_history.txt
+  635  cat docker_commands_history.txt 
+  636  history |grep docker > /home/student/docker_commands_history.txt
