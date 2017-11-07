@@ -1,0 +1,101 @@
+1. Basic container usage and commands :
+
+# docker run name:tag (get an image from the local images or from registry)
+# docker pull
+# docker create
+# docker start
+>> hub.docker.com >> images from public registry
+# docker run -d nginx (uses the latest images)
+. -d = detach
+# docker ps (lists the runnig containers)
+# docker ps --no-truc (no truncated images)
+# docker run -d --name newname nginx (gives the names to an images)
+# docker ps -a (shows all containers on or off)
+>> exit code (0) = container stops correctly
+>> exit code (137) = container stops w/ errors
+# docker run -ti --name b2 busybox (to get a prompt)
+. t = pseudo terminal
+. i = interactive
+
+
+
+2. Attaching and detaching from a container :
+
+# ctrl p + q (detach from the container)
+# docker attach container_name 
+>> it is possible to kill a process outside a container by listing and killing the correct process
+
+
+3. Running specific commands in containers
+
+# docker exec (exec a cmd in a container where it is impossible to have an interactive prompt; ex : nginx )
+# docker exec nginx2 id (displays id's) 
+# docker exec nginx2 ip a s (displays ip's)
+# docker exec -ti nginx2 /bin/bash (grabs a shell in the container)
+
+
+4. Temporary - one shot - containers
+
+# docker run --name b4 busybox command (run one command inside the container and exit, no container running but still exists in ps -a)
+# docker run --name b10 busybox --rm ip a s (runs the command inside the container but the container exist just the time of the cmd)
+. --rm = remove
+
+
+5. Default user settings and running containers with specific user IDs
+
+>> if no user specified = root user is the default user <<
+
+# docker run --rm -u 500:500 busybox id
+. -u = user
+. 500:500 = userid:groupid
+>> runs the container w/ uid=500 gid=500
+
+# docker run --rm -u student busybox id
+>> same but the user must exist on the container
+
+
+6. Examining container processes and ressource usage :
+
+# docker top container_name
+# docker stats nginx2 (cpu, mem, net...)
+
+
+7. Stopping, starting and killing containers
+
+# docker stop container_name
+# docker stop -t 15 nginx2 
+. -t = give an amount of time to stop
+# docker kill container_name (kill the container)
+
+# docker start container_name
+
+
+8. Removing containers
+
+# docker rm container_name
+# docker rm container_id
+>> stop a container before removing it <<
+# docker rm -v container (removes container + persistant datastore as well >> becareful)
+
+
+9. Watching/examining container logs
+
+# docker logs container
+>> /var/lib/docker/containers = where are containers and container id's and logs like 211937297389127389123721897-json.log 
+
+
+10. Container configuration files
+
+>> config.v2.json = store the config files of the container
+
+11. Logs again : How to monitor logs continuously
+
+# docker logs -f containers (shows what happens in the container in real time)
+
+
+12. Ressources limits on containers
+
+# docker run -d --name nginx3 -m 500M nginx (limits the ressources of the container to 500M memory)
+# docker stats nginx3 (check that works or not)
+# docker run -d --name nginx5 -m 512M --memory-reservation 256M nginx
+>> it allocates 500M to the container and reserves at least 256M to run it.
