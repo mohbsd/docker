@@ -1,0 +1,91 @@
+Menu :
+1. Configuring and using container networks - basics
+2. Publishing ports
+
+1. Configuring and using container networks - basics
+
+# docker network ls
+(bridge is the default)
+# brctl show (to see the bridges)
+
+>> container >eth0 >virtual Bridge >host >eth0 >outside_net
+
+# docker network inspect bridge 
+(show the specs fo the bridge)
+"com.docker.network.bridge.enable_ip_masquerade": "true"
+> masquerade : all the network will see outside the network
+# iptables -L -t nat (to see that)
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination         
+MASQUERADE  all  --  172.17.0.0/16        anywhere 
+
+ >> none = no network connection
+ >> host = will share the network namespace (not recommanded)
+ >> bridge are used + dynamic ports + load balancers <<
+
+ # docker run -d --name web1 nginx
+ # docker network inspect bridge (see the container attached)
+ # docker exec -ti web1 ip addr show
+ bridge = 172.17.0.2/16
+ network = 172.17.0.0
+ gateway = 172.17.1.1
+ # docker run -ti busybox1 busybox
+ # ip a s
+ >> see the ip and ping btw containers
+ >> icc = inter container connections
+
+ << connect container to different network >>
+ # docker run --rm --net=none -ti busybox
+ (connects container to a none network - just the loopback)
+
+ # docker run --rm --net=host -ti busybox
+ (use the host network space) 
+
+<< Create different network >>
+ # docker network create network_name
+ (will create a new separate network bridge on the host)
+ # docker network inspect network_name
+ >> 172.18.0.0 
+ # docker network rm  network_name
+
+ << create an internal different network >>
+ # docker network create --internal --subnet=172.22.0.0/16 network_name
+ # docker network ls
+ (lists the network)
+ # docker run -ti --net=network_name container_name image
+ (runs a container on a specific network)
+ (this network is isolated into its on network, can not communicate with other internal networks and on the internet too)
+
+
+2. Publishing ports
+<< how to expose ports >>
+# docker run -d -P --name container_name image
+. -P = ports = will expose all the ports defined in the definition of an image
+>> iptables -L -t nat (see the DNAT forwarded ports)
+# docker port container_name
+443/tcp -> 0.0.0.0:32770
+80/tcp -> 0.0.0.0:32771
+>> port 443 of the host is forwarded tp 32771 of the container > so multiple container can use port 80 or 443 or any forwarded port of the host
+>> in entreprise network to a loadbalancer which will forward to the host <<
+
+# cat /proc/sys/net/ipv4/ip_local_port_range 
+32768	60999
+>> the Linux kernel defines a port range to use for local ips (used in this case by docker) <<#
+
+<< expose just one port for the image >>
+# docker run -d -p 80 --name=container_name image
+# docker port container_name
+(only port 80 will exposed)
+# iptables -L -t nat
+
+>> you can overwrite the default port
+# docker run -d --name container_name -p 8000:80 image
+# docker port container_name
+80/tcp -> 0.0.0.0:8000
+# iptables -L -t nat
+(see on CHAIN DOCKER section the forwarded port)
+>>> telnet 172.17.0.2 80 = telnet 10.0.2.15 8000
+(172... is the container address , 10... is the host address)
+
+
+

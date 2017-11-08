@@ -1,0 +1,56 @@
+1. How to use internal volumes
+2. How to use external volumes
+3. Removing volumes
+4. Copying files from and to containers	
+
+
+1. How to use internal volumes
+>> /var/lib/docker/volumes = contain volumes
+# docker run -d -ti --name container_name -v /data busybox (create volume for the container, then you can find the volume on the container and on the local host machine)
+. -v = volume
+# docker inspect container_name |less (see the mount section to find the created volume)
+
+2. How to use external volumes
+>> bind mount directory or file from the host file system <<
+
+# mkdir /mnt/dir1 (create a directory on the host filesystem)
+# echo Test > /mnt/dir1/dir1testfile.txt (create a testfile on it)
+# docker run -d -ti --name container_nameA -v /mnt/dir1:/data image_name
+(this mounts a subdirectory with a file inside on the host file system to the directory /data on the container)
+(data created on the container can be viewed on the host fs and vice versa)
+
+<<mount a volume from a container to another one>>
+# docker run -d -ti --name container_nameB --volumes-from=container_nameA image_name
+(this mounts the external volume from container_nameA to container_nameB)(and everything you write on the volume is readable on both containers because you mounted an external volume to containers)#
+# docker inspect container_name |less 
+(it shows the "Binds" section what host directory/volume is mounted on what container directory )
+
+<< mount a read only volume to containers >>
+# mkdir /mnt/dir2
+# docker run -d -ti --name container_nameC -v /mnt/dir2:/data:ro image_name
+# docker attach container_nameC	
+(you will be able to list and only read the /data directory)
+
+
+3. Removing volumes
+
+# docker stop container_name
+# docker rm -v container_name
+. -v = volume
+(it removes the volume inside the container but not inside the host fs)
+
+4. Copying files from and to containers	
+c1 = container1
+c2 = container2
+<<copy file from container to local host>>
+# docker cp c1:/data/testfile.txt /tmp/
+# ls /tmp/
+testfile.txt
+
+<<copy file from host to container>>
+# docker cp /tmp/testfile.txt c2:/data/
+(possible just from docker 1.8)
+
+
+
+
