@@ -1,0 +1,11 @@
+How to Install docker on Linux Red Hat v7
+
+ 
+Docker and Docker Registry have been released as part of the Extras channel in Red Hat Enterprise Linux. Once the Extras channel has been enabled, the packages can be installed in the usual way.
+ 
+Enable the extras channel:
+
+$ sudo subscription-manager repos --enable=rhel-7-server-extras-rpms
+Install Docker:
+
+$ sudo yum install docker

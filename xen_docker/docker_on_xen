@@ -1,0 +1,21 @@
+Docker running natively on Xen
+zega | May 10 2016 ‎ | 2,115 Views 0 people like this
+ 
+One cool feature brought by latest XenServer is support to run Docker containers natively.
+Many Docker applications run in containers within VMs hosted on hypervisors such as XenServer and other Virtual machine platforms, like VMWare. The synergy between containers as an application isolation mechanism and hypervisors as a secure physical infrastructure virtualization mechanism is something strongly believed by Citrix (XenServer Maintainer).
+ 
+Docker support for XenServer is a feature of XenServer 6.5 SP1 which leverages container isolation experience and can be downloaded from the XenServer download page. The support is delivered as a supplemental pack named "xs-container" which also includes support for CoreOS and cloud-drives.
+ 
+After pack installation, you will be able to manage your Docker containers using XenCenter. How cool is that, uh?
+ 
+Follow below steps to have xs-container pack installed in or XenServer dom0 host server:
+ 
+-----------------
+1 - Firstly ,you have to logon on Xen dom0 host server and download the plugin to support Docker, using below command:
+$ wget http://downloadns.citrix.com.edgesuite.net/10343/XenServer-6.5.0-SP1-xscontainer.iso
+
+
+2- Just fireThen install the container plugin support using following command:
+$ xe-install-supplemental-pack XenServer-6.5.0-SP1-xscontainer.iso
+-----------------
+That's it. At this time your system is prepared to run and manager containers.

@@ -1,0 +1,73 @@
+How to manually build your own Apache HTTP server container on Docker
+
+In this post I  am showing how to manually build a Middleware Docker Container Web Server service, based in Apache.
+Creating your own images is useful to perform deployments in large scale, using a pre-prepared installation.
+You will learn how to build you own Docker Image, using Linux Debian "Jessie" as its base, with Apache 2 ready.
+
+
+Menu: 
+1 - Pulling Debian Linux image from Docker repository
+2 - Running a container using the images you just pulled
+3 - Installing "apache2" Debian package on your container
+4 - Commiting the changes and tagging new image
+5 - Running your own Apache container
+6 - Checking your installation
+
+
+1 - Pulling Debian Linux image from Docker repository
+Get Debian image from Docker repository. I picked Debian 8.0 - Jessie.
+$ docker pull debian:jessie
+
+
+2 - Running a container using the images you just pulled
+Now, use below command to check the Image ID that you just have pulled from Docker's repository:
+$ docker images
+You will get the following output:
+REPOSITORY    TAG       IMAGE ID         CREATED      VIRTUAL SIZE
+debian         jessie    040bf8e08425     5 days ago   125.1 MB
+Use Image ID reference to run our new Debian Container. Parameters "-ti" means that session will be interactive:
+$ docker run -ti 040bf8e08425 
+You are now already inside the container, you should see a prompt similar to this:
+root@e4c7575c5a4d:/#
+
+
+3 - Installing "apache2" Debian package on your container
+On you container's prompt, let's first update Jessie repositories:
+root@e4c7575c5a4d:/# apt-get -y update
+Now system is ready to install Apache 32 and all its dependencies. Just run:
+root@e4c7575c5a4d:/# apt-get -y install apache2
+It should take some time to pull all dependencies and finally install Apache 2 Web Server. After this you can go ahead and ajust httpd.conf files and anything you judge necessary to your web server be ready to run.
+Exit your container, by typing "exit". You should get the original server host prompt. Now that you have Apache 2 installed recently created container, it is time to commit those changes in order create a new image to reflected the changes you just have done in the original Debian Jessie image.
+ 
+
+
+4 - Commiting the changes and tagging new image
+Commit your changes
+$ docker commit 040bf8e08425
+After commit, a new image will be created. List your images again.
+$ docker images
+You should  get an output simitlar to:
+REPOSITORY    TAG       IMAGE ID         CREATED          VIRTUAL SIZE
+<none>         <none>    555ee9e0c2ee      4 seconds ago    193.8 MB
+debian         jessie    040bf8e08425     5 days ago       125.1 MB
+Now you can see the image you just have created using commit  command.
+ 
+Tag your new image, using new IMAGE ID:
+$ docker tag 555ee9e0c2ee debian-apache:v1
+List your new tagged image:
+$ docker images
+REPOSITORY     TAG       IMAGE ID            CREATED         VIRTUAL SIZE
+debian-apache  v1        555ee9e0c2ee        5 minutes ago   193.8 MB
+
+
+5 - Running your own Apache container
+Now it is time to check if everything that you have done is working properly. At this time, you already have your own Debian container, which is prepared to run Apache.
+Just a reminder. When you start apache on container, it will listen only on container's IP. If you plan to provide access to the web server to out side, meaning bind the host ports, it is necessary to expose apache ports. In order to achieve that, it is necessary to add '-p <host port:container port>' for each port you are planning to open.
+In below example, I will be running the container and exposing 8080 port on host server, redirecting to container's 80 port . Also, I will providing the command to start apache (/etc/init.d/apache2 start). You can also replace image ID by tagged name (ie: debian-apache:v1).
+ 
+$ docker run -p 8080:80 debian-apache:v1 /usr/sbin/apache2ctl -D FOREGROUND
+
+
+6 - Checking your installation
+To test if installation has succeeded, just hit http://<host ip>:8080/
+You should get Apache2 default welcome page.
